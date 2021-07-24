@@ -20,11 +20,11 @@ def predict(text, trained_model):
 
 def main():
     tm = copy.deepcopy(load_trained_model())
-    st.title("fake news detector v-23")
+    st.title("fake news detector v-2")
 
     html_temp = """
     <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;">Streamlit Bank Authenticator ML App </h2>
+    <h2 style="color:white;text-align:center;"></h2>
     </div>
     """
     hide_st_style = """
