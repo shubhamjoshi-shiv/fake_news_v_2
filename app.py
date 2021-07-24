@@ -24,7 +24,7 @@ def main():
 
     html_temp = """
     <div style="background-color:tomato;padding:10px">
-    <h2 style="color:white;text-align:center;"></h2>
+    <h2 style="color:white;text-align:center;">fake news</h2>
     </div>
     """
     hide_st_style = """
