@@ -39,7 +39,13 @@ def main():
     news_text = st.text_area('plese enter the text of news here-')
     if st.button("Predict"):
         result = predict(news_text, tm)
-        st.write("the news seems to be",result)
+        st.write("the news seems to be", result)
+        if result:
+            pass
+        else:
+            video_file = open('fake_fake_disgusting_news.mp4', 'rb')
+            video_bytes = video_file.read()
+            st.video(video_bytes)
 
 
 if __name__ == '__main__':
