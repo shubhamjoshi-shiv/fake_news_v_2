@@ -41,7 +41,10 @@ def main():
         result = predict(news_text, tm)
         st.write("the news seems to be", result)
         if result:
-            pass
+            video_file = open('very_true.mkv', 'rb')
+            video_bytes = video_file.read()
+            st.video(video_bytes)
+
         else:
             video_file = open('fake_fake_disgusting_news.mp4', 'rb')
             video_bytes = video_file.read()
