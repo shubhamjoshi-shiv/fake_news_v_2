@@ -34,7 +34,7 @@ def test_url(url, tm):
 
 def main():
     tm = copy.deepcopy(load_trained_model())
-    st.title("fake news detector v-2")
+    st.title("Fake news detector")
 
     html_temp = """
     <div style="background-color:tomato;padding:10px">
@@ -50,10 +50,10 @@ def main():
             """
     st.markdown(hide_st_style, unsafe_allow_html=True)
 
-    news_text = st.text_area('please enter the text of news here-')
+    news_text = st.text_area('Please enter the text of news here-')
     if st.button("Predict"):
         result = predict(news_text, tm)
-        st.write("the news seems to be", result)
+        st.write("The news seems to be", result)
         if result:
             video_file = open('very_true.mkv', 'rb')
             video_bytes = video_file.read()
@@ -63,10 +63,11 @@ def main():
             video_file = open('fake_fake_disgusting_news.mp4', 'rb')
             video_bytes = video_file.read()
             st.video(video_bytes)
-    news_url = st.text_area('please enter the url of news here-')
+    news_url = st.text_area(
+        'Or if you have the url please enter the url of news here-')
     if st.button("Predict from the url"):
         result = test_url(news_url, tm)
-        st.write(result[1], "the news seems to be", result[0])
+        st.write(result[1], "The news seems to be", result[0])
         if result[0]:
             video_file = open('very_true.mkv', 'rb')
             video_bytes = video_file.read()
