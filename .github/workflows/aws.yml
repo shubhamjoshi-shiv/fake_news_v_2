@@ -28,4 +28,4 @@ jobs:
         cd /home/ubuntu/app && git pull origin main && 
         source myenv/bin/activate && 
         pip install -r requirements.txt &&
-        pm2 restart streamlit-app || pm2 start 'streamlit run app.py --server.port 80 --server.address 0.0.0.0' --name streamlit-app"
+        pm2 restart streamlit-app || pm2 start 'streamlit run app.py --server.port 8501 --server.address 0.0.0.0' --name streamlit-app"
