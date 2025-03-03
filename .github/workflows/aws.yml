@@ -13,10 +13,10 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup SSH
+    - name: Setup SSH Key
       run: |
         echo "${{ secrets.EC2_SSH_KEY }}" > private_key
-        chmod 600 ~/private_key
+        chmod 600 private_key  # Set correct permissions
         
 
     - name: Deploy to EC2
@@ -25,7 +25,7 @@ jobs:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
-        ssh -o StrictHostKeyChecking=no -i EC2_SSH_KEY $EC2_USER@$EC2_HOST "
+        ssh -o StrictHostKeyChecking=no -i private_key $EC2_USER@$EC2_HOST "
         cd /home/ubuntu/app && git pull origin main && 
         source myenv/bin/activate && 
         pip install -r requirements.txt &&
