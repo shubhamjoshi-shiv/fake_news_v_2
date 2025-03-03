@@ -17,6 +17,7 @@ jobs:
       run: |
         echo "${{ secrets.EC2_SSH_KEY }}" > private_key
         chmod 600 private_key  # Set correct permissions
+        ls
         
 
     - name: Deploy to EC2
@@ -25,7 +26,7 @@ jobs:
         EC2_USER: ${{ secrets.EC2_USER }}
         EC2_HOST: ${{ secrets.EC2_HOST }}
       run: |
-        ssh -o StrictHostKeyChecking=no -i private_key $EC2_USER@$EC2_HOST "
+        ssh -o StrictHostKeyChecking=no -i private_key $EC2_USER@$EC2_HOST
         cd /home/ubuntu/
         source myenv/bin/activate 
         streamlit run fast_api_app/streamlit_app.py --server.port 8502 --server.address 0.0.0.0
