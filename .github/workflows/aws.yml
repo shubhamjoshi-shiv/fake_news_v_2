@@ -1,0 +1,31 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Change to your branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup SSH Key
+      run: |
+        echo "$EC2_SSH_KEY" > private_key
+        chmod 600 private_key
+
+    - name: Deploy to EC2
+      env:
+        EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+        EC2_USER: ${{ secrets.EC2_USER }}
+        EC2_HOST: ${{ secrets.EC2_HOST }}
+      run: |
+        ssh -o StrictHostKeyChecking=no -i private_key $EC2_USER@$EC2_HOST "
+        cd /home/ubuntu/app && git pull origin main && 
+        source myenv/bin/activate && 
+        pip install -r requirements.txt &&
+        pm2 restart streamlit-app || pm2 start 'streamlit run app.py --server.port 80 --server.address 0.0.0.0' --name streamlit-app"
